@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/03 23:29:56 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/03 23:43:24 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ typedef struct s_fdf
 	void	*win_ptr;
 }	t_fdf;
 
-int		deal_key(int key, t_fdf *data);
+int		deal_key(int key, t_fdf *data, t_mlx *img);
 void	read_file(char *file_name, t_fdf *data);
 void	fill_matrix(int *z_line, char *line);
 int		get_width(char *file_name);
 int		get_height(char *file_name);
-void	bresenham(float x, float y, float x1, float y1, t_fdf *data);
-void	draw(t_fdf *data);
+void	bresenham(float x, float y, float x1, float y1, t_fdf *data, t_mlx *img);
+void	draw(t_fdf *data, t_mlx *img);
 void	isometric(float *x, float *y, int z);
+void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 void	ft_err(int	code);
 float	MAX(float a, float b);

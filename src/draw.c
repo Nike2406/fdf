@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/03 23:29:48 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/03 23:45:32 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	isometric(float *x, float *y, int z)
 }
 
 // [1:1] [3:12]
-void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
+void	bresenham(float x, float y, float x1, float y1, t_fdf *data, t_mlx *img)
 {
 	float	x_step;
 	float	y_step;
@@ -83,29 +83,53 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
 	y_step /= max;
 	while ((int)(x - x1) || (int)(y - y1))
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, data->color);
+		my_mlx_pixel_put(img, x, y, data->color);
+		// mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, data->color);
 		x += x_step;
 		y += y_step;
 	}
 }
 
-void	draw(t_fdf *data)
+void	draw(t_fdf *data, t_mlx *img)
 {
 	int	x;
 	int	y;
 
 	y = 0;
+	img->img = mlx_new_image(data->mlx_ptr, 1000, 1000);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,\
+		&img->line_length, &img->endian);
+
 	while (y < data->height)
 	{
 		x = 0;
 		while (x < data->width)
 		{
 			if (x < data->width - 1)
-				bresenham(x, y, x + 1, y, data);
+				bresenham(x, y, x + 1, y, data, img);
 			if (y < data->height - 1)
-				bresenham(x, y, x, y + 1, data);
+				bresenham(x, y, x, y + 1, data, img);
 			x++;
 		}
 		y++;
 	}
+
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img->img, x, y);
+	// int	x;
+	// int	y;
+
+	// y = 0;
+	// while (y < data->height)
+	// {
+	// 	x = 0;
+	// 	while (x < data->width)
+	// 	{
+	// 		if (x < data->width - 1)
+	// 			bresenham(x, y, x + 1, y, data);
+	// 		if (y < data->height - 1)
+	// 			bresenham(x, y, x, y + 1, data);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
 }

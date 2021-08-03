@@ -6,13 +6,13 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:53:41 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/03 23:29:33 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/03 23:55:52 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-int	deal_key(int key, t_fdf *data)
+int	deal_key(int key, t_fdf *data, t_mlx *img)
 {
 	ft_putnbr(key);
 	ft_putchar('\n');
@@ -28,8 +28,9 @@ int	deal_key(int key, t_fdf *data)
 		exit(0);
 	else
 		return (0);
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	draw(data);
+	mlx_destroy_image(data->mlx_ptr, img->img);
+	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	draw(data, img);
 	return (0);
 }
 
@@ -65,28 +66,28 @@ int	main(int argc, char **argv)
 
 	// test
 	t_mlx	img;
-	img.img = mlx_new_image(data->mlx_ptr, 1000, 1000);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,\
-		&img.line_length, &img.endian);
+	// img.img = mlx_new_image(data->mlx_ptr, 1000, 1000);
+	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,\
+	// 	&img.line_length, &img.endian);
 
-	int i = 0;
-	int i1;
-	while (i < 100)
-	{
-		i1 = 0;
-		while (i1 < 100)
-		{
-			my_mlx_pixel_put(&img, i, i1, 0xFFFFFF);
-			i1++;
-		}
-		i++;
-	}
+	// int i = 0;
+	// int i1;
+	// while (i < 100)
+	// {
+	// 	i1 = 0;
+	// 	while (i1 < 100)
+	// 	{
+	// 		my_mlx_pixel_put(&img, i, i1, 0xFFFFFF);
+	// 		i1++;
+	// 	}
+	// 	i++;
+	// }
 
-	my_mlx_pixel_put(&img, 0, 0, 0xFFFFFF);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img.img, 400, 400);
+	// my_mlx_pixel_put(&img, 0, 0, 0xFFFFFF);
+	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img.img, 400, 400);
 
 	// main
-	// draw(data);
+	draw(data, &img);
 	mlx_key_hook(data->win_ptr, deal_key, data);
 	mlx_loop(data->mlx_ptr);
 
