@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/03 15:07:27 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/03 15:26:36 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
 
 
 	// Color
-	if (z)
+	if (z || z1)
 		data->color = 0xFFCF40;
 	else
 		data->color = 0x8243D6;
@@ -69,6 +69,12 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
 	y += 300;
 	x1 += 400;
 	y1 += 300;
+
+	// Shift
+	x += data->shift_x;
+	x1 += data->shift_x;
+	y += data->shift_y;
+	y1 += data->shift_y;
 
 	x_step = x1 - x; // -2
 	y_step = y1 - y; // -11

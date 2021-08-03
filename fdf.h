@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/03 14:15:38 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/03 15:24:46 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ typedef struct s_fdf
 	int	**matrix;
 	int	zoom;
 	int	color;
+	int	shift_x;
+	int	shift_y;
 
 	void	*mlx_ptr;
 	void	*win_ptr;
 }	t_fdf;
 
-int		deal_key(int key, void *data);
+int		deal_key(int key, t_fdf *data);
 void	read_file(char *file_name, t_fdf *data);
 void	fill_matrix(int *z_line, char *line);
 int		get_width(char *file_name);
