@@ -1,0 +1,11 @@
+/.idea/
+/cmake-build-debug/
+*.o
+fdf
+*.a
+test.fdf
+a.out.dSYM
+push_swap.dSYM
+*.gch
+*.out
+checker
