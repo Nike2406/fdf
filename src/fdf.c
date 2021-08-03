@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:53:41 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/03 15:36:06 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/03 23:29:33 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ int	deal_key(int key, t_fdf *data)
 	return (0);
 }
 
+void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color) // test
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
 int	main(int argc, char **argv)
 {
 	t_fdf	*data;
@@ -54,7 +62,31 @@ int	main(int argc, char **argv)
 	// mlx_pixel_put(data->mlx_ptr, data->win_ptr, (int)x, (int)y, #color);
 	// bresenham(10, 10 , 600, 300, data);
 	data->zoom = 40;
-	draw(data);
+
+	// test
+	t_mlx	img;
+	img.img = mlx_new_image(data->mlx_ptr, 1000, 1000);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,\
+		&img.line_length, &img.endian);
+
+	int i = 0;
+	int i1;
+	while (i < 100)
+	{
+		i1 = 0;
+		while (i1 < 100)
+		{
+			my_mlx_pixel_put(&img, i, i1, 0xFFFFFF);
+			i1++;
+		}
+		i++;
+	}
+
+	my_mlx_pixel_put(&img, 0, 0, 0xFFFFFF);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img.img, 400, 400);
+
+	// main
+	// draw(data);
 	mlx_key_hook(data->win_ptr, deal_key, data);
 	mlx_loop(data->mlx_ptr);
 

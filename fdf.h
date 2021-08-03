@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/03 15:24:46 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/03 23:29:56 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@
 # include <stdio.h> // Del
 # include <math.h>
 # include "./minilibx_macos/mlx.h"
+
+typedef struct s_mlx
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_mlx;
+
 
 typedef struct s_fdf
 {
