@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/03 23:45:32 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/04 13:39:31 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ float	MAX(float a, float b)
 		return (a);
 }
 
-void	isometric(float *x, float *y, int z)
+void	isometric(float *x, float *y, int z, t_fdf *data)
 {
 	*x = (*x - *y) * cos(0.8);
-	*y = (*x + *y) * sin(0.8) - z;
+	*y = (*x + *y) * sin(0.8) - z * data->cof_z;
 }
 
 // [1:1] [3:12]
-void	bresenham(float x, float y, float x1, float y1, t_fdf *data, t_mlx *img)
+void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
 {
 	float	x_step;
 	float	y_step;
@@ -61,8 +61,8 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *data, t_mlx *img)
 		data->color = 0x8243D6;
 
 	// Isometric
-	isometric(&x, &y, z);
-	isometric(&x1, &y1, z1);
+	isometric(&x, &y, z, data);
+	isometric(&x1, &y1, z1, data);
 
 	// Centering
 	x += 400;
@@ -83,22 +83,22 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *data, t_mlx *img)
 	y_step /= max;
 	while ((int)(x - x1) || (int)(y - y1))
 	{
-		my_mlx_pixel_put(img, x, y, data->color);
+		my_mlx_pixel_put(data, x, y, data->color);
 		// mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, data->color);
 		x += x_step;
 		y += y_step;
 	}
 }
 
-void	draw(t_fdf *data, t_mlx *img)
+void	draw(t_fdf *data)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	img->img = mlx_new_image(data->mlx_ptr, 1000, 1000);
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,\
-		&img->line_length, &img->endian);
+	// img->img = mlx_new_image(data->mlx_ptr, 1000, 1000);
+	// img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,\
+	// 	&img->line_length, &img->endian);
 
 	while (y < data->height)
 	{
@@ -106,15 +106,15 @@ void	draw(t_fdf *data, t_mlx *img)
 		while (x < data->width)
 		{
 			if (x < data->width - 1)
-				bresenham(x, y, x + 1, y, data, img);
+				bresenham(x, y, x + 1, y, data);
 			if (y < data->height - 1)
-				bresenham(x, y, x, y + 1, data, img);
+				bresenham(x, y, x, y + 1, data);
 			x++;
 		}
 		y++;
 	}
 
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img->img, x, y);
+	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img->img, x, y);
 	// int	x;
 	// int	y;
 
