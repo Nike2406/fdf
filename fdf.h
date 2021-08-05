@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/04 21:26:33 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/06 01:17:37 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ typedef struct s_fdf
 	int		img_width;
 	int		img_height;
 
+	float	x;
+	float	y;
+	float	z;
+	float	x1;
+	float	y1;
+	float	z1;
+
 	void	*mlx_ptr;
 	void	*win_ptr;
 }	t_fdf;
@@ -53,6 +60,7 @@ void	isometric(float *x, float *y, int z, t_fdf *data);
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
 void	first_render(t_fdf *data);
 void	following_render(t_fdf *data);
+void	get_color(t_fdf *data, float x, float y, float x1, float y1, int z, int z1);
 
 int		create_trgb(int t, int r, int g, int b);
 int		get_t(int trgb);

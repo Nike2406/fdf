@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:53:41 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/05 23:01:52 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/06 00:13:32 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	deal_key(int key, t_fdf *data)
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color) // test
 {
 	char	*dst;
+	// Передача параметров xyz для отображения
+	data->x = x;
+	data->y = y;
+	// data->x1 = x1;
+	// data->y1 = y1;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	// printf("dst - %p\n", dst);
@@ -56,7 +61,13 @@ void	following_render(t_fdf *data)
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	draw(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 200, 200, 0x0000ffff, "Please, help");
+	// /// Show tab
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 100, 0x0000ffff, "x = ");
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 100, 0x0000ffff, ft_itoa((int)data->x));
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 150, 0x0000ffff, "y = ");
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 150, 0x0000ffff, ft_itoa((int)data->y));
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 200, 0x0000ffff, "z = ");
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 200, 0x0000ffff, ft_itoa((int)data->z));
 	mlx_destroy_image(data->mlx_ptr, tmp);
 }
 
@@ -69,9 +80,14 @@ void	first_render(t_fdf *data)
 		&data->line_length, &data->endian);
 	draw(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, x, y, 0x0000ffff, "Please, help");
+	// // Show tab
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 100, 0x0000ffff, "x = ");
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 100, 0x0000ffff, ft_itoa((int)data->x));
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 150, 0x0000ffff, "y = ");
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 150, 0x0000ffff, ft_itoa((int)data->y));
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 200, 0x0000ffff, "z = ");
+	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 200, 0x0000ffff, ft_itoa((int)data->z));
 	mlx_hook(data->win_ptr, 2, 1L<<0, deal_key, data);
-	// mlx_key_hook(data->win_ptr, deal_key, data);
 	mlx_loop(data->mlx_ptr);
 }
 
@@ -89,6 +105,7 @@ int	main(int argc, char **argv)
 	data->cof_z = 1;
 	data->img_height = 1000;
 	data->img_width = 1000;
+	data->color = 0xFFCF40;
 	first_render(data);
 	return (0);
 }
