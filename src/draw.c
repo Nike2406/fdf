@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/05 22:38:00 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/05 23:01:19 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
 	}
 }
 
-void	drqaw(t_fdf *data)
+void	draw(t_fdf *data)
 {
 	int	x;
 	int	y;
