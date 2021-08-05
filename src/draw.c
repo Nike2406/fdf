@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/04 21:19:39 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/05 22:38:00 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
 	y_step /= max;
 	while ((int)(x - x1) || (int)(y - y1))
 	{
-		if ((x >= 0 && x <= data->img_width) && (y >= 0 && y <= data->img_height))
+		if ((x >= 0 && x <= data->img_width) && \
+		(y >= 0 && y <= data->img_height))
 			my_mlx_pixel_put(data, x, y, data->color);
 		x += x_step;
 		y += y_step;

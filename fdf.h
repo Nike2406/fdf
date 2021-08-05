@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/04 20:09:26 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/04 21:26:33 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ typedef struct s_fdf
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int	width;
-	int	height;
-	int	**matrix;
-	int	zoom;
-	int	color;
-	int	shift_x;
-	int	shift_y;
-	float cof_z;
-	int	img_width;
-	int	img_height;
+	int		width;
+	int		height;
+	int		**matrix;
+	int		zoom;
+	int		color;
+	int		shift_x;
+	int		shift_y;
+	float	cof_z;
+	int		img_width;
+	int		img_height;
 
 	void	*mlx_ptr;
 	void	*win_ptr;
