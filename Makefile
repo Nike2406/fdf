@@ -16,9 +16,9 @@ endif
 LIBFT_OBJS	= $(LIBFT:%.c=%.o)
 SRCS 		= src/fdf.c \
 			src/read_file.c \
-			get_next_line/get_next_line.c \
 			src/utils.c \
-			src/draw.c
+			src/draw.c \
+			get_next_line/get_next_line.c
 SRCS_BONUS	=
 INCLUDE		= fdf.h \
 			get_next_line/get_next_line.h
