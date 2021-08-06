@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/06 01:42:47 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/06 21:27:46 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,36 +42,38 @@ void	get_color(t_fdf *data, float x, float y, float x1, float y1, int z, int z1)
 	// else
 	// 	data->color = 0x8243D6;
 	// int	tmp_color;
-	int	col1 = 0xFFCF40;
-	int	col2 = 0x8243D6;
-	float	coeff;
+	// int	col1 = 0xFFCF40;
+	// int	col2 = 0x8243D6;
+	// float	coeff;
 
-	// (void)x;
-	// (void)y;
-	// (void)x1;
-	// (void)y1;
-	// (void)z;
-	// (void)z1;
 
-	// if (z || z1)
-	// 	data->color += 1000;
-	// else
-	// 	data->color = 0x8243D6;
+	(void)x;
+	(void)y;
+	(void)x1;
+	(void)y1;
+	(void)z;
+	(void)z1;
 
-	coeff = sqrt((x1 - y1) * (x1 - y1)
-			+ (x - y) * (x - y))
-		/ sqrt((x1 - z1) * (x1 - z1)
-			+ (x - z) * (x - z));
+	// data->color = 0x8243D6;
+	// if (z)
+	// 	data->color += z;
+	// else if (z1)
+	// 	data->color += z1;
 
-	data->color = create_trgb(0, get_r(col1) \
-			+ (get_r(col2) - get_r(col1)) * coeff, \
-			get_g(col1) + (get_g(col2) - get_g(col1)) * coeff, \
-			get_b(col1) + (get_b(col2) - get_b(col1)) * coeff);
+	// coeff = sqrt((x1 - y1) * (x1 - y1)
+	// 		+ (x - y) * (x - y))
+	// 	/ sqrt((y - z1) * (y - z1)
+	// 		+ (x - z) * (x - z));
 
-	// if (z || z1)
-	// 	data->color = create_trgb(0, 255, 0, 0);
-	// else
-	// 	data->color = create_trgb(0, 0, 255, 0);
+	// data->color = create_trgb(0, get_r(col1) \
+	// 		+ (get_r(col2) - get_r(col1)) * coeff, \
+	// 		get_g(col1) + (get_g(col2) - get_g(col1)) * coeff, \
+	// 		get_b(col1) + (get_b(col2) - get_b(col1)) * coeff);
+
+	if (z || z1)
+		data->color = 0xFFCF40;
+	else
+		data->color = create_trgb(0, 0, 255, 0);
 
 }
 
@@ -115,12 +117,12 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
 	x_step /= max;
 	y_step /= max;
 
-	get_color(data, x, y, x1, y1, z, z1);
 	while ((int)(x - x1) || (int)(y - y1))
 	{
 		if ((x >= 0 && x <= data->img_width) && \
 		(y >= 0 && y <= data->img_height))
 		{
+			get_color(data, x, y, x1, y1, z, z1);
 			my_mlx_pixel_put(data, x, y, data->color);
 		}
 		x += x_step;

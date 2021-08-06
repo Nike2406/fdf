@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:53:41 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/06 00:13:32 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/06 21:26:43 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ int	deal_key(int key, t_fdf *data)
 	else
 		return (0);
 	following_render(data);
+	return (0);
+}
+
+int	deal_mouse(int key, t_fdf data)
+{
+	(void)data;
+	ft_putnbr(key);
+	ft_putstr("\n");
 	return (0);
 }
 
@@ -88,6 +96,7 @@ void	first_render(t_fdf *data)
 	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 200, 0x0000ffff, "z = ");
 	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 200, 0x0000ffff, ft_itoa((int)data->z));
 	mlx_hook(data->win_ptr, 2, 1L<<0, deal_key, data);
+	mlx_mouse_hook(data->win_ptr, deal_mouse, data);
 	mlx_loop(data->mlx_ptr);
 }
 
