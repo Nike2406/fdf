@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:53:41 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/06 21:26:43 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/07 23:40:10 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ int	deal_key(int key, t_fdf *data)
 		data->cof_z += 0.1;
 	else if (key == 12)
 		data->cof_z -= 0.1;
+	else if (key == 69)
+		data->zoom += 5;
+	else if (key == 78)
+	{
+		if (data->zoom <= 1)
+			return (0);
+		else
+			data->zoom -= 5;
+	}
 	else if (key == 53)
 		exit(0);
 	else
@@ -36,22 +45,31 @@ int	deal_key(int key, t_fdf *data)
 	return (0);
 }
 
-int	deal_mouse(int key, t_fdf data)
+int	deal_mouse(int key, int x, int y, t_fdf *data)
 {
-	(void)data;
-	ft_putnbr(key);
-	ft_putstr("\n");
+	// ft_putnbr(key);
+	// ft_putchar('\n');
+	(void)x;
+	(void)y;
+	if (key == 4)
+		data->zoom += 5;
+	if (key == 5)
+	{
+		if (data->zoom <= 1)
+			return (0);
+		else
+			data->zoom -= 5;
+	}
+	if (key == 1)
+		data->left_butt = 1;
+
+	following_render(data);
 	return (0);
 }
 
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color) // test
 {
 	char	*dst;
-	// Передача параметров xyz для отображения
-	data->x = x;
-	data->y = y;
-	// data->x1 = x1;
-	// data->y1 = y1;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	// printf("dst - %p\n", dst);
@@ -76,6 +94,12 @@ void	following_render(t_fdf *data)
 	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 150, 0x0000ffff, ft_itoa((int)data->y));
 	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 200, 0x0000ffff, "z = ");
 	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 200, 0x0000ffff, ft_itoa((int)data->z));
+
+	// mlx_hook(data->win_ptr, 17, 0, ft_err, data); // exit with red button
+	// mlx_hook(data->win_ptr, 5, 0, mouse_up, data);
+	// mlx_hook(data->win_ptr, 6, 0, mouse_move, data);
+	// mlx_hook(data->win_ptr, 4, 0, deal_mouse, data);
+
 	mlx_destroy_image(data->mlx_ptr, tmp);
 }
 
@@ -96,7 +120,10 @@ void	first_render(t_fdf *data)
 	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 200, 0x0000ffff, "z = ");
 	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 200, 0x0000ffff, ft_itoa((int)data->z));
 	mlx_hook(data->win_ptr, 2, 1L<<0, deal_key, data);
-	mlx_mouse_hook(data->win_ptr, deal_mouse, data);
+	mlx_hook(data->win_ptr, 17, 0, ft_err, data); // exit with red button
+	mlx_hook(data->win_ptr, 4, 0, deal_mouse, data);
+	mlx_hook(data->win_ptr, 5, 0, mouse_up, data);
+	mlx_hook(data->win_ptr, 6, 0, mouse_move, data);
 	mlx_loop(data->mlx_ptr);
 }
 
@@ -110,11 +137,7 @@ int	main(int argc, char **argv)
 	if (!data)
 		ft_err(1);
 	read_file(argv[1], data);
-	data->zoom = 40;
-	data->cof_z = 1;
-	data->img_height = 1000;
-	data->img_width = 1000;
-	data->color = 0xFFCF40;
+	data_preset(data);
 	first_render(data);
 	return (0);
 }

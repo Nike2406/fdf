@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/06 21:23:22 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/07 23:26:22 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_fdf
 	float	cof_z;
 	int		img_width;
 	int		img_height;
+	int		left_butt;
 
 	float	x;
 	float	y;
@@ -50,7 +51,9 @@ typedef struct s_fdf
 }	t_fdf;
 
 int		deal_key(int key, t_fdf *data);
-int		deal_mouse(int key, t_fdf data);
+int		deal_mouse(int key, int x, int y, t_fdf *data);
+int		mouse_up(int key, int x, int y, t_fdf *data);
+int		mouse_move(int x, int y, t_fdf *data);
 void	read_file(char *file_name, t_fdf *data);
 void	fill_matrix(int *z_line, char *line);
 int		get_width(char *file_name);
@@ -69,7 +72,8 @@ int		get_r(int trgb);
 int		get_g(int trgb);
 int		get_b(int trgb);
 
-void	ft_err(int	code);
+int		ft_err(int	code);
+void	data_preset(t_fdf *data);
 float	MAX(float a, float b);
 float	MOD(float a);
 

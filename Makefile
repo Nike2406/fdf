@@ -18,6 +18,7 @@ SRCS 		= src/fdf.c \
 			src/read_file.c \
 			src/utils.c \
 			src/draw.c \
+			src/rotate.c \
 			get_next_line/get_next_line.c
 SRCS_BONUS	=
 INCLUDE		= fdf.h \

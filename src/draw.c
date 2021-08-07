@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/06 21:27:46 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/07 20:19:59 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,11 @@ void	get_color(t_fdf *data, float x, float y, float x1, float y1, int z, int z1)
 	// 		get_b(col1) + (get_b(col2) - get_b(col1)) * coeff);
 
 	if (z || z1)
+	{
 		data->color = 0xFFCF40;
+	}
 	else
-		data->color = create_trgb(0, 0, 255, 0);
+		data->color = 0x8243D6;
 
 }
 

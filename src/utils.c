@@ -6,19 +6,18 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:56:50 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/04 19:29:02 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/07 23:20:21 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-void	ft_err(int	code)
+int	ft_err(int	code)
 {
 	if (code == 1)
 		ft_putstr("Error\n");
-	else
-		ft_putstr("Unexpected error.\n");
 	exit(code);
+	return (1);
 }
 
 int	create_trgb(int t, int r, int g, int b)
@@ -44,4 +43,14 @@ int	get_g(int trgb)
 int	get_b(int trgb)
 {
 	return (trgb & 0xFF);
+}
+
+void	data_preset(t_fdf *data)
+{
+	data->zoom = 40;
+	data->cof_z = 1;
+	data->img_height = 1000;
+	data->img_width = 1000;
+	data->color = 0xFFCF40;
+	data->left_butt = 0;
 }
