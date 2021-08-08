@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/07 20:19:59 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/08 14:41:51 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	get_color(t_fdf *data, float x, float y, float x1, float y1, int z, int z1)
 // [1:1] [3:12]
 void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
 {
+
 	float	x_step;
 	float	y_step;
 	int		max;

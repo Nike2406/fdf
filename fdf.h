@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/08 14:13:33 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/08 14:53:20 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ int		deal_key(int key, t_fdf *data);
 int		deal_mouse(int key, int x, int y, t_fdf *data);
 int		mouse_up(int key, int x, int y, t_fdf *data);
 int		mouse_move(int x, int y, t_fdf *data);
-void	read_file(char *file_name, t_fdf *data);
-void	fill_matrix(int *z_line, char *line);
-int		get_width(char *file_name);
-int		get_height(char *file_name);
 void	bresenham(float x, float y, float x1, float y1, t_fdf *data);
 void	draw(t_fdf *data);
 void	isometric(float *x, float *y, int z, t_fdf *data);
@@ -73,6 +69,12 @@ int		get_t(int trgb);
 int		get_r(int trgb);
 int		get_g(int trgb);
 int		get_b(int trgb);
+
+void	read_file(char *file_name, t_fdf *data);
+void	fill_matrix(int *z_line, char *line);
+int		get_width(char *file_name);
+int		get_height(char *file_name);
+int		prefill(int fd, t_fdf *data, int j);
 
 int		ft_err(int	code);
 void	data_preset(t_fdf *data);
