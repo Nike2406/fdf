@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/07 23:26:22 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/08 14:13:33 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_fdf
 	int		img_width;
 	int		img_height;
 	int		left_butt;
+	int		render_flag;
 
 	float	x;
 	float	y;
@@ -62,9 +63,10 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *data);
 void	draw(t_fdf *data);
 void	isometric(float *x, float *y, int z, t_fdf *data);
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
-void	first_render(t_fdf *data);
-void	following_render(t_fdf *data);
+void	render(t_fdf *data);
 void	get_color(t_fdf *data, float x, float y, float x1, float y1, int z, int z1);
+void	get_hook(t_fdf *data);
+void	show_tab(t_fdf *data);
 
 int		create_trgb(int t, int r, int g, int b);
 int		get_t(int trgb);

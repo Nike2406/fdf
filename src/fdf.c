@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:53:41 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/07 23:40:10 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/08 14:13:43 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	deal_key(int key, t_fdf *data)
 		exit(0);
 	else
 		return (0);
-	following_render(data);
+	render(data);
 	return (0);
 }
 
@@ -63,7 +63,7 @@ int	deal_mouse(int key, int x, int y, t_fdf *data)
 	if (key == 1)
 		data->left_butt = 1;
 
-	following_render(data);
+	render(data);
 	return (0);
 }
 
@@ -77,54 +77,70 @@ void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color) // test
 	*(unsigned int *)dst = color;
 }
 
-void	following_render(t_fdf *data)
+// void	following_render(t_fdf *data)
+// {
+// 	void	*tmp;
+// 	tmp = data->img;
+// 	data->img = mlx_new_image(data->mlx_ptr, data->img_width, data->img_height);
+// 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,\
+// 		&data->line_length, &data->endian);
+// 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+// 	draw(data);
+// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
+// 	show_tab(data);
+// 	get_hook(data);
+// 	mlx_destroy_image(data->mlx_ptr, tmp);
+// }
+
+// void	first_render(t_fdf *data)
+// {
+// 	data->mlx_ptr = mlx_init();
+// 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->img_width, data->img_height, "FDF");
+// 	data->img = mlx_new_image(data->mlx_ptr, data->img_width, data->img_height);
+// 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,\
+// 		&data->line_length, &data->endian);
+// 	draw(data);
+// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
+// 	show_tab(data);
+// 	get_hook(data);
+// 	mlx_loop(data->mlx_ptr);
+// }
+
+void	render(t_fdf *data)
 {
 	void	*tmp;
-	tmp = data->img;
+	if (!data->render_flag)
+	{
+		data->mlx_ptr = mlx_init();
+		data->win_ptr = mlx_new_window(data->mlx_ptr, data->img_width, data->img_height, "FDF");
+	}
+	if (data->render_flag)
+		tmp = data->img;
 	data->img = mlx_new_image(data->mlx_ptr, data->img_width, data->img_height);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,\
 		&data->line_length, &data->endian);
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	if (data->render_flag)
+		mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	draw(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-	// /// Show tab
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 100, 0x0000ffff, "x = ");
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 100, 0x0000ffff, ft_itoa((int)data->x));
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 150, 0x0000ffff, "y = ");
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 150, 0x0000ffff, ft_itoa((int)data->y));
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 200, 0x0000ffff, "z = ");
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 200, 0x0000ffff, ft_itoa((int)data->z));
-
-	// mlx_hook(data->win_ptr, 17, 0, ft_err, data); // exit with red button
-	// mlx_hook(data->win_ptr, 5, 0, mouse_up, data);
-	// mlx_hook(data->win_ptr, 6, 0, mouse_move, data);
-	// mlx_hook(data->win_ptr, 4, 0, deal_mouse, data);
-
-	mlx_destroy_image(data->mlx_ptr, tmp);
+	show_tab(data);
+	get_hook(data);
+	if (data->render_flag)
+		mlx_destroy_image(data->mlx_ptr, tmp);
+	if (!data->render_flag)
+	{
+		data->render_flag = 1;
+		mlx_loop(data->mlx_ptr);
+	}
 }
 
-void	first_render(t_fdf *data)
+void	get_hook(t_fdf *data)
 {
-	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->img_width, data->img_height, "FDF");
-	data->img = mlx_new_image(data->mlx_ptr, data->img_width, data->img_height);
-	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,\
-		&data->line_length, &data->endian);
-	draw(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-	// // Show tab
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 100, 0x0000ffff, "x = ");
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 100, 0x0000ffff, ft_itoa((int)data->x));
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 150, 0x0000ffff, "y = ");
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 150, 0x0000ffff, ft_itoa((int)data->y));
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 100, 200, 0x0000ffff, "z = ");
-	// mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 200, 0x0000ffff, ft_itoa((int)data->z));
 	mlx_hook(data->win_ptr, 2, 1L<<0, deal_key, data);
 	mlx_hook(data->win_ptr, 17, 0, ft_err, data); // exit with red button
 	mlx_hook(data->win_ptr, 4, 0, deal_mouse, data);
 	mlx_hook(data->win_ptr, 5, 0, mouse_up, data);
 	mlx_hook(data->win_ptr, 6, 0, mouse_move, data);
-	mlx_loop(data->mlx_ptr);
 }
 
 int	main(int argc, char **argv)
@@ -138,6 +154,6 @@ int	main(int argc, char **argv)
 		ft_err(1);
 	read_file(argv[1], data);
 	data_preset(data);
-	first_render(data);
+	render(data);
 	return (0);
 }

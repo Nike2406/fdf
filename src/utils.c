@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:56:50 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/07 23:20:21 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/08 13:58:53 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ void	data_preset(t_fdf *data)
 	data->img_width = 1000;
 	data->color = 0xFFCF40;
 	data->left_butt = 0;
+	data->render_flag = 0;
 }
