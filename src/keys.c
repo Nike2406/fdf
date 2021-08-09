@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 00:21:31 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/08 14:55:11 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/09 22:30:46 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int	deal_key(int key, t_fdf *data)
 	else if (key == 123 || key == 0)
 		data->shift_x -= 10;
 	else if (key == 14)
-		data->cof_z += 0.1;
+		data->cof_z += 0.02;
 	else if (key == 12)
-		data->cof_z -= 0.1;
+		data->cof_z -= 0.02;
 	else if (key == 69)
 		data->zoom += 5;
 	else if (key == 78)
 	{
-		if (data->zoom <= 1)
+		if (data->zoom <= 0)
 			return (0);
 		else
 			data->zoom -= 5;
@@ -74,7 +74,7 @@ int	deal_mouse(int key, int x, int y, t_fdf *data)
 		data->zoom += 5;
 	if (key == 5)
 	{
-		if (data->zoom <= 1)
+		if (data->zoom <= 0)
 			return (0);
 		else
 			data->zoom -= 5;

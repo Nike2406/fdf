@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/09 13:15:57 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/10 01:19:58 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@
 # include <stdio.h> // Del
 # include <math.h>
 # include "./minilibx_macos/mlx.h"
+
+typedef struct s_col
+{
+	int	t;
+	int	r;
+	int	g;
+	int	b;
+}	t_col;
 
 typedef struct s_fdf
 {
@@ -40,6 +48,7 @@ typedef struct s_fdf
 	int		left_butt;
 	int		render_flag;
 
+	struct	s_col	trgb;
 	float	x;
 	float	y;
 	float	z;
@@ -65,11 +74,18 @@ void	get_color(t_fdf *data);
 void	get_hook(t_fdf *data);
 void	show_tab(t_fdf *data);
 
-int		create_trgb(int t, int r, int g, int b);
+void	rotate_x(t_fdf *data);
+void	rotate_y(t_fdf *data);
+void	rotate_z(t_fdf *data);
+
+int		create_trgb(t_col *col);
 int		get_t(int trgb);
 int		get_r(int trgb);
 int		get_g(int trgb);
 int		get_b(int trgb);
+t_col	get_col(int	trgb);
+t_col	val_shift(t_col *a, t_col *b, int step);
+void	plus_shift(t_col *a, t_col *shift);
 
 void	read_file(char *file_name, t_fdf *data);
 void	fill_matrix(int *z_line, char *line);

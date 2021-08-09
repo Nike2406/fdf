@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/09 14:21:07 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/10 01:17:13 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	isometric(t_fdf *data)
 	data->x = (data->x - data->y) * cos(0.8);
 	data->y = (data->x + data->y) * sin(0.8) - data->z * data->cof_z;
 	data->x1 = (data->x1 - data->y1) * cos(0.8);
-	data->y1 = (data->x1 + data->y1) * sin(0.8) - data->z1 * data->cof_z;
+	data->y1 = (data->x1 + data->y1) * sin(0.8) - data->z1 * data->cof_z; //(data->z1 * data->zoom / data->cof_z)
 }
 
 void	get_color(t_fdf *data)
@@ -81,35 +81,33 @@ void	get_color(t_fdf *data)
 
 }
 
-// [1:1] [3:12]
 void	bresenham(t_fdf *data)
 {
 	float	x_step;
 	float	y_step;
 	int		max;
-	// int		z;
-	// int		z1;
-	// data->x = x;
-	// data->x1 = x1;
-	// data->y = y;
-	// data->y1 = y1;
 
 	data->z = data->matrix[(int)data->y][(int)data->x];
 	data->z1 = data->matrix[(int)data->y1][(int)data->x1];
 
 	// Zoom
+	// float coeff = data->zoom / data->cof_z;
 	data->x *= data->zoom;
 	data->y *= data->zoom;
 	data->x1 *= data->zoom;
 	data->y1 *= data->zoom;
+	data->z *= data->zoom / 2;
+	data->z1 *= data->zoom / 2;
 
-	// data->x = x;
-	// data->x1 = x1;
-	// data->y = y;
-	// data->y1 = y1;
+
+	// Rotate
+	// rotate_x(data);
+	// rotate_y(data);
+	// rotate_z(data);
 
 	// Isometric
 	isometric(data);
+
 
 	// Centering
 	data->x += 400;
@@ -129,22 +127,53 @@ void	bresenham(t_fdf *data)
 	x_step /= max;
 	y_step /= max;
 
-	//  x = data->x;
-	//  x1 = data->x1;
-	//  y = data->y;
-	//  y1 = data->y1;
+	// while ((int)(data->x - data->x1) || (int)(data->y - data->y1))
+	// {
+	// 	if ((data->x >= 0 && data->x <= data->img_width) && \
+	// 	(data->y >= 0 && data->y < data->img_height))
+	// 	{
+	// 		get_color(data);
+	// 		my_mlx_pixel_put(data, data->x, data->y, data->color);
+	// 	}
+	// 	data->x += x_step;
+	// 	data->y += y_step;
+	// }
 
-	while ((int)(data->x - data->x1) || (int)(data->y - data->y1))
+	float tmp_px;
+	float tmp_py;
+	t_col	trgb0;
+	t_col	trgb1;
+	t_col	trgb_shift;
+
+	if (data->z)
+		trgb0 = get_col(0x0000AA);
+	else
+		trgb0 = get_col(0xFFFFFF);
+	if (data->z1)
+		trgb1 = get_col(0xAA0000);
+	else
+		trgb1 = get_col(0xFFFFFF);
+	tmp_px = data->x;
+	tmp_py = data->y;
+
+	trgb_shift = val_shift(&trgb0, &trgb1, max);
+	if (trgb_shift.r)
+		printf("H\n");
+
+	while ((int)(tmp_px - data->x1) || (int)(tmp_py - data->y1))
 	{
-		if ((data->x >= 0 && data->x <= data->img_width) && \
-		(data->y >= 0 && data->y <= data->img_height))
+		if ((tmp_px >= 0 && tmp_px <= data->img_width) && \
+		(tmp_py >= 0 && tmp_py < data->img_height))
 		{
-			get_color(data);
-			my_mlx_pixel_put(data, data->x, data->y, data->color);
+			// get_color(data);
+			plus_shift(&trgb0, &trgb_shift);
+			my_mlx_pixel_put(data, tmp_px, tmp_py, create_trgb(&trgb0));
 		}
-		data->x += x_step;
-		data->y += y_step;
+		tmp_px += x_step;
+		tmp_py += y_step;
 	}
+	data->x = tmp_px;
+	data->y = tmp_py;
 }
 
 void	pre_brase(int f, float x, float y, t_fdf *data)

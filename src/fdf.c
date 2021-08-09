@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:53:41 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/09 14:19:33 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/09 14:24:25 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,6 @@ void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color) // test
 	// printf("color - %d\n", color);
 	*(unsigned int *)dst = color;
 }
-
-// void	following_render(t_fdf *data)
-// {
-// 	void	*tmp;
-// 	tmp = data->img;
-// 	data->img = mlx_new_image(data->mlx_ptr, data->img_width, data->img_height);
-// 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,\
-// 		&data->line_length, &data->endian);
-// 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-// 	draw(data);
-// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-// 	show_tab(data);
-// 	get_hook(data);
-// 	mlx_destroy_image(data->mlx_ptr, tmp);
-// }
-
-// void	first_render(t_fdf *data)
-// {
-// 	data->mlx_ptr = mlx_init();
-// 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->img_width, data->img_height, "FDF");
-// 	data->img = mlx_new_image(data->mlx_ptr, data->img_width, data->img_height);
-// 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,\
-// 		&data->line_length, &data->endian);
-// 	draw(data);
-// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-// 	show_tab(data);
-// 	get_hook(data);
-// 	mlx_loop(data->mlx_ptr);
-// }
 
 void	render(t_fdf *data)
 {

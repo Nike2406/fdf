@@ -20,6 +20,7 @@ SRCS 		= src/fdf.c \
 			src/draw1.c \
 			src/draw2.c \
 			src/keys.c \
+			src/rotate.c \
 			get_next_line/get_next_line.c
 SRCS_BONUS	=
 INCLUDE		= fdf.h \
