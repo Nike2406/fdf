@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:56:50 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/10 15:15:55 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/10 23:12:50 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ int	ft_err(int	code)
 	return (1);
 }
 
-// int	create_trgb(t_col *col)
-// {
-// 	// return (col->t << 24 | col->r << 16 | col->g << 8 | col->b);
-// 	int	res;
+int	create_trgb(t_col *col)
+{
+	// return (col->t << 24 | col->r << 16 | col->g << 8 | col->b);
+	int	res;
 
-// 	res = col->t;
-// 	res <<= 8;
-// 	res += col->r;
-// 	res <<= 8;
-// 	res += col->g;
-// 	res <<= 8;
-// 	res += col->b;
-// 	return (res);
-// }
+	res = col->t;
+	res <<= 8;
+	res += col->r;
+	res <<= 8;
+	res += col->g;
+	res <<= 8;
+	res += col->b;
+	return (res);
+}
 
 t_col	get_col(int	trgb)
 {
@@ -72,15 +72,15 @@ t_col	get_col(int	trgb)
 	// col.g = (trgb & (0xFF << 8));
 	// col.b = (trgb & 0xFF );
 
-	col.t = trgb >> 24;
-	col.r = (trgb << 8) >> 16;
-	col.g = (trgb << 16) >> 24;
-	col.b = (trgb << 24) >> 24;
+	// col.t = trgb >> 24;
+	// col.r = (trgb << 8) >> 16;
+	// col.g = (trgb << 16) >> 24;
+	// col.b = (trgb << 24) >> 24;
 
-	// col.t = 0x00;
-	// col.r = (trgb >> 8 * 2) - ((trgb >> (8 * 3)) << 8);
-	// col.g = (trgb >> 8) - ((trgb >> (8 * 2)) << 8);
-	// col.b = (trgb) - ((trgb >> 8) << 8);
+	col.t = 0x00;
+	col.r = (trgb >> 8 * 2) - ((trgb >> (8 * 3)) << 8);
+	col.g = (trgb >> 8) - ((trgb >> (8 * 2)) << 8);
+	col.b = (trgb) - ((trgb >> 8) << 8);
 
 	// col.t = 0x00;
 	// col.r = (trgb >> 8 * 2) - ((trgb >> (8 * 3)) << 8);
@@ -115,46 +115,46 @@ void	plus_shift(t_col *a, t_col *shift)
 }
 
 //ILRECH
-int	create_trgb(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
-
-int	get_r(int trgb)
-{
-	return ((trgb & (0xFF << 16)) >> 16);
-}
-
-int	get_g(int trgb)
-{
-	return ((trgb & (0xFF << 8)) >> 8);
-}
-
-int	get_b(int trgb)
-{
-	return (trgb & 0xFF);
-}
-// End Ilrech
-
-// int	get_t(int trgb)
+// int	create_trgb(int r, int g, int b)
 // {
-// 	return (trgb & (0xFF << 24));
+// 	return (r << 16 | g << 8 | b);
 // }
 
 // int	get_r(int trgb)
 // {
-// 	return (trgb & (0xFF << 16));
+// 	return ((trgb & (0xFF << 16)) >> 16);
 // }
 
 // int	get_g(int trgb)
 // {
-// 	return (trgb & (0xFF << 8));
+// 	return ((trgb & (0xFF << 8)) >> 8);
 // }
 
 // int	get_b(int trgb)
 // {
 // 	return (trgb & 0xFF);
 // }
+// End Ilrech
+
+int	get_t(int trgb)
+{
+	return (trgb & (0xFF << 24));
+}
+
+int	get_r(int trgb)
+{
+	return (trgb & (0xFF << 16));
+}
+
+int	get_g(int trgb)
+{
+	return (trgb & (0xFF << 8));
+}
+
+int	get_b(int trgb)
+{
+	return (trgb & 0xFF);
+}
 
 
 void	data_preset(t_fdf *data)

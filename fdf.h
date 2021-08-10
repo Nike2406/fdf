@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/10 21:47:30 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/10 23:08:56 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,20 @@ void	rotate_x(t_fdf *data);
 void	rotate_y(t_fdf *data);
 void	rotate_z(t_fdf *data);
 
-// int		create_trgb(t_col *col);
-// int		get_t(int trgb);
-// int		get_r(int trgb);
-// int		get_g(int trgb);
-// int		get_b(int trgb);
+int		create_trgb(t_col *col);
+int		get_t(int trgb);
+int		get_r(int trgb);
+int		get_g(int trgb);
+int		get_b(int trgb);
 t_col	get_col(int	trgb);
 t_col	val_shift(t_col *a, t_col *b, int step);
 void	plus_shift(t_col *a, t_col *shift);
 
 //Ilrech
-int	create_trgb(int r, int g, int b);
-int	get_r(int trgb);
-int	get_g(int trgb);
-int	get_b(int trgb);
+// int	create_trgb(int r, int g, int b);
+// int	get_r(int trgb);
+// int	get_g(int trgb);
+// int	get_b(int trgb);
 
 
 void	read_file(char *file_name, t_fdf *data);
