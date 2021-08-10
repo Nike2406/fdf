@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:56:50 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/10 23:12:50 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/10 23:18:03 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ t_col	get_col(int	trgb)
 	// col.b = (trgb & 0xFF );
 
 	// col.t = trgb >> 24;
-	// col.r = (trgb << 8) >> 16;
-	// col.g = (trgb << 16) >> 24;
-	// col.b = (trgb << 24) >> 24;
+	col.r = (trgb << 8) >> 16;
+	col.g = (trgb << 16) >> 24;
+	col.b = (trgb << 24) >> 24;
 
-	col.t = 0x00;
-	col.r = (trgb >> 8 * 2) - ((trgb >> (8 * 3)) << 8);
-	col.g = (trgb >> 8) - ((trgb >> (8 * 2)) << 8);
-	col.b = (trgb) - ((trgb >> 8) << 8);
+	// col.t = 0x00;
+	// col.r = (trgb >> 8 * 2) - ((trgb >> (8 * 3)) << 8);
+	// col.g = (trgb >> 8) - ((trgb >> (8 * 2)) << 8);
+	// col.b = (trgb) - ((trgb >> 8) << 8);
 
 	// col.t = 0x00;
 	// col.r = (trgb >> 8 * 2) - ((trgb >> (8 * 3)) << 8);
