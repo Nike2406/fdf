@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 16:06:13 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/08 14:54:21 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/10 23:02:46 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,16 @@ int	get_width(char *file_name)
 void	fill_matrix(int *z_line, char *line)
 {
 	char	**nums;
+	// char	**colrs;
 	int		i;
 
 	nums = ft_split(line, ' ');
 	i = 0;
 	while (nums[i])
 	{
+		// colrs = ft_split(line, ',');
+		// while (colrs[j])
+
 		z_line[i] = ft_atoi(nums[i]);
 		free(nums[i]);
 		i++;
@@ -110,4 +114,17 @@ void	read_file(char *file_name, t_fdf *data)
 	i = prefill(fd, data, j);
 	close(fd);
 	data->matrix[i - 1] = NULL;
+
+	i = 0;
+	while (i < data->height)
+	{
+		j = 0;
+		while (j < data->width)
+		{
+			printf("%d ", data->matrix[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 }
