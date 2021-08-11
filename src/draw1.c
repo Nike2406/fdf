@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/12 00:18:26 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/12 01:31:59 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ float	MAX(float a, float b)
 
 void	isometric(t_fdf *data, t_dot *p, t_dot *p1)
 {
-	p->x = (p->x - p->y) * cos(data->alpha);
-	p->y = (p->x + p->y) * sin(data->alpha) - p->z * data->cof_z;
+	(void)p;
+	// p->x = (p->x - p->y) * cos(data->alpha);
+	// p->y = (p->x + p->y) * sin(data->alpha) - p->z * data->cof_z;
 	p1->x = (p1->x - p1->y) * cos(data->alpha);
 	p1->y = (p1->x + p1->y) * sin(data->alpha) - p1->z * data->cof_z;
 }
