@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/10 23:08:56 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/11 14:13:37 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	draw(t_fdf *data);
 void	isometric(t_fdf *data);
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
 void	render(t_fdf *data);
-int		get_color(t_fdf *data, double start_x, double start_y);
 void	get_hook(t_fdf *data);
 void	show_tab(t_fdf *data);
 
@@ -79,21 +78,7 @@ void	rotate_x(t_fdf *data);
 void	rotate_y(t_fdf *data);
 void	rotate_z(t_fdf *data);
 
-int		create_trgb(t_col *col);
-int		get_t(int trgb);
-int		get_r(int trgb);
-int		get_g(int trgb);
-int		get_b(int trgb);
-t_col	get_col(int	trgb);
-t_col	val_shift(t_col *a, t_col *b, int step);
-void	plus_shift(t_col *a, t_col *shift);
-
-//Ilrech
-// int	create_trgb(int r, int g, int b);
-// int	get_r(int trgb);
-// int	get_g(int trgb);
-// int	get_b(int trgb);
-
+void	get_color(t_fdf *data);
 
 void	read_file(char *file_name, t_fdf *data);
 void	fill_matrix(int *z_line, char *line);
