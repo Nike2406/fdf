@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 00:21:31 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/09 22:30:46 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/11 23:16:11 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 
 int	mouse_move(int x, int y, t_fdf *data)
 {
+	data->mouse_x = x;
+	data->mouse_y = y;
 	if (data->left_butt && x >= 0 && x <= data->img_width && \
 		y >= 0 && y <= data->img_height)
 	{
-		printf("x - %d, y - %d, %f\n", x, y, data->x1);
+		if (x / 20 < data->mouse_x)
+			data->rotate_y += 0.05;
+		if (x / 20 < data->mouse_x)
+			data->rotate_y -= 0.05;
+		if (y / 20 > data->mouse_y)
+			data->rotate_x += 0.05;
+		if (y / 20 < data->mouse_y)
+			data->rotate_x -= 0.05;
+		printf("x - %d, y - %d, \n", x, y);
 	}
+	draw(data);
 	return (0);
 }
 
@@ -48,13 +59,13 @@ int	deal_key(int key, t_fdf *data)
 	else if (key == 12)
 		data->cof_z -= 0.02;
 	else if (key == 69)
-		data->zoom += 5;
+		data->zoom += 4;
 	else if (key == 78)
 	{
 		if (data->zoom <= 0)
 			return (0);
 		else
-			data->zoom -= 5;
+			data->zoom -= 4;
 	}
 	else if (key == 53)
 		exit(0);
@@ -71,13 +82,13 @@ int	deal_mouse(int key, int x, int y, t_fdf *data)
 	(void)x;
 	(void)y;
 	if (key == 4)
-		data->zoom += 5;
+		data->zoom += 4;
 	if (key == 5)
 	{
 		if (data->zoom <= 0)
 			return (0);
 		else
-			data->zoom -= 5;
+			data->zoom -= 4;
 	}
 	if (key == 1)
 		data->left_butt = 1;

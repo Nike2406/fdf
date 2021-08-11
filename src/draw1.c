@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/11 14:13:29 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/11 22:34:17 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,42 +28,36 @@ float	MAX(float a, float b)
 		return (a);
 }
 
-void	isometric(t_fdf *data)
+void	isometric(t_fdf *data, t_dot *p, t_dot *p1)
 {
-	data->x = (data->x - data->y) * cos(0.8);
-	data->y = (data->x + data->y) * sin(0.8) - data->z * data->cof_z;
-	data->x1 = (data->x1 - data->y1) * cos(0.8);
-	data->y1 = (data->x1 + data->y1) * sin(0.8) - data->z1 * data->cof_z;
+	p->x = (p->x - p->y) * cos(0.8);
+	p->y = (p->x + p->y) * sin(0.8) - p->z * data->cof_z;
+	p1->x = (p1->x - p1->y) * cos(0.8);
+	p1->y = (p1->x + p1->y) * sin(0.8) - p1->z * data->cof_z;
 }
 
-void	get_color(t_fdf *data)
+void	get_color(t_dot *p, t_dot *p1)
 {
-	if (data->z || data->z1)
+	if (p->z || p1->z)
 	{
-		data->color = 0xFFCF40;
+		p->color = 0xFFCF40;
 	}
 	else
-		data->color = 0x8243D6;
+		p->color = 0x8243D6;
 }
 
-void	bresenham(t_fdf *data)
+void	get_position(t_fdf *data, t_dot *p, t_dot *p1)
 {
-	float	x_step;
-	float	y_step;
-	long	max;
-
-	data->z = data->matrix[(int)data->y][(int)data->x];
-	data->z1 = data->matrix[(int)data->y1][(int)data->x1];
+	p->z = data->matrix[(int)p->y][(int)p->x];
+	p1->z = data->matrix[(int)p1->y][(int)p1->x];
 
 	// Zoom
-	// float coeff = data->zoom / data->cof_z;
-	data->x *= data->zoom;
-	data->y *= data->zoom;
-	data->x1 *= data->zoom;
-	data->y1 *= data->zoom;
-	data->z *= data->zoom / 2;
-	data->z1 *= data->zoom / 2;
-
+	p->x *= data->zoom;
+	p->y *= data->zoom;
+	p1->x *= data->zoom;
+	p1->y *= data->zoom;
+	p->z *= data->zoom / 2;
+	p1->z *= data->zoom / 2;
 
 	// Rotate
 	// rotate_x(data);
@@ -71,61 +65,72 @@ void	bresenham(t_fdf *data)
 	// rotate_z(data);
 
 	// Isometric
-	isometric(data);
-
-
+	isometric(data, p, p1);
 	// Centering
-	data->x += 400;
-	data->y += 300;
-	data->x1 += 400;
-	data->y1 += 300;
+	p->x += 400;
+	p->y += 300;
+	p1->x += 400;
+	p1->y += 300;
 
 	// Shift
-	data->x += data->shift_x;
-	data->x1 += data->shift_x;
-	data->y += data->shift_y;
-	data->y1 += data->shift_y;
+	p->x += data->shift_x;
+	p1->x += data->shift_x;
+	p->y += data->shift_y;
+	p1->y += data->shift_y;
 
-	x_step = data->x1 - data->x; // -2
-	y_step = data->y1 - data->y; // -11
+	rotate_x(p, p1, data);
+	rotate_y(p, p1, data);
+	rotate_z(p, p1, data);
+}
+
+void	bresenham(t_fdf *data, t_dot *p, t_dot *p1)
+{
+	double	x_step;
+	double	y_step;
+	long	max;
+
+	// show_tab(data, p);
+	get_position(data, p, p1);
+
+	x_step = p1->x - p->x; // -2
+	y_step = p1->y - p->y; // -11
 	max = MAX(MOD(x_step), MOD(y_step));
 	x_step /= max;
 	y_step /= max;
 
-	// double start_x = data->x;
-	// double start_y = data->x;
-
-	while ((int)(data->x - data->x1) || (int)(data->y - data->y1))
+	while ((int)(p->x - p1->x) || (int)(p->y - p1->y))
 	{
-		if ((data->x >= 0 && data->x <= data->img_width) && \
-		(data->y >= 0 && data->y < data->img_height))
+		if ((p->x >= 0 && p->x <= data->img_width) && \
+		(p->y >= 0 && p->y < data->img_height))
 		{
-			get_color(data);
-			my_mlx_pixel_put(data, data->x, data->y, data->color);
+			get_color(p, p1);
+			my_mlx_pixel_put(data, p->x, p->y, p->color);
 		}
-		data->x += x_step;
-		data->y += y_step;
+		p->x += x_step;
+		p->y += y_step;
 	}
 }
 
-void	pre_brase(int f, double x, double y, t_fdf *data)
+void	pre_brase(int f, t_dot *p, t_dot *p1, int x, int y)
 {
-	data->x = x;
-	data->y = y;
+	p->x = x;
+	p->y = y;
 	if (!f)
 	{
-		data->x1 = x + 1;
-		data->y1 = y;
+		p1->x = p->x + 1;
+		p1->y = p->y;
 	}
 	else
 	{
-		data->x1 = x;
-		data->y1 = y + 1;
+		p1->x = p->x;
+		p1->y = p->y + 1;
 	}
 }
 
 void	draw(t_fdf *data)
 {
+	t_dot	p;
+	t_dot	p1;
 	int	x;
 	int	y;
 
@@ -137,13 +142,13 @@ void	draw(t_fdf *data)
 		{
 			if (x < data->width - 1)
 			{
-				pre_brase(0, x, y, data);
-				bresenham(data);
+				pre_brase(0, &p, &p1, x, y);
+				bresenham(data, &p, &p1);
 			}
 			if (y < data->height - 1)
 			{
-				pre_brase(1, x, y, data);
-				bresenham(data);
+				pre_brase(1, &p, &p1, x, y);
+				bresenham(data, &p, &p1);
 			}
 			x++;
 		}

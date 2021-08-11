@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 14:04:37 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/11 14:12:32 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/11 14:57:21 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,30 +118,30 @@
 // 	t_col	trgb1;
 // 	t_col	trgb_shift;
 
-// 	if (data->z)
+// 	if (p->z)
 // 		trgb0 = get_col(0xAA0000);
 // 	else
 // 		trgb0 = get_col(0xFFFFFF);
-// 	if (data->z1)
+// 	if (p1->z)
 // 		trgb1 = get_col(0xAA0000);
 // 	else
 // 		trgb1 = get_col(0xFFFFFF);
 
 // 	trgb_shift = val_shift(&trgb0, &trgb1, max);
-// 	// double start_x = data->x;
-// 	// double start_y = data->x;
+// 	// double start_x = p->x;
+// 	// double start_y = p->x;
 
-// 	while ((int)(data->x - data->x1) || (int)(data->y - data->y1))
+// 	while ((int)(p->x - p->x1) || (int)(p->y - p->y1))
 // 	{
-// 		if ((data->x >= 0 && data->x <= data->img_width) && \
-// 		(data->y >= 0 && data->y < data->img_height))
+// 		if ((p->x >= 0 && p->x <= data->img_width) && \
+// 		(p->y >= 0 && p->y < data->img_height))
 // 		{
 
 // 			plus_shift(&trgb0, &trgb_shift);
-// 			my_mlx_pixel_put(data, data->x, data->y, create_trgb(&trgb0)); // get_color(data, start_x, start_y)
+// 			my_mlx_pixel_put(data, p->x, p->y, create_trgb(&trgb0)); // get_color(data, start_x, start_y)
 // 		}
-// 		data->x += x_step;
-// 		data->y += y_step;
+// 		p->x += x_step;
+// 		p->y += y_step;
 // 	}
 
 // Header

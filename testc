@@ -1,14 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/09 13:18:00 by prochell         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    testc                                              :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: prochell <prochell@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/08/01 14:12:58 by prochell          #+#    #+#              #
+#    Updated: 2021/08/11 14:57:21 by prochell         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 #include "../fdf.h"
 
@@ -30,10 +30,10 @@ float	MAX(float a, float b)
 
 void	isometric(t_fdf *data)
 {
-	data->x = (data->x - data->y) * cos(0.8);
-	data->y = (data->x + data->y) * sin(0.8) - data->z * data->cof_z;
-	data->x1 = (data->x1 - data->y1) * cos(0.8);
-	data->y1 = (data->x1 + data->y1) * sin(0.8) - data->z1 * data->cof_z;
+	p->x = (p->x - p->y) * cos(0.8);
+	p->y = (p->x + p->y) * sin(0.8) - p->z * data->cof_z;
+	p->x1 = (p->x1 - p->y1) * cos(0.8);
+	p->y1 = (p->x1 + p->y1) * sin(0.8) - p1->z * data->cof_z;
 }
 
 void	get_color(t_fdf *data)
@@ -72,7 +72,7 @@ void	get_color(t_fdf *data)
 	// 		get_g(col1) + (get_g(col2) - get_g(col1)) * coeff, \
 	// 		get_b(col1) + (get_b(col2) - get_b(col1)) * coeff);
 
-	if (data->z || data->z1)
+	if (p->z || p1->z)
 	{
 		data->color = 0xFFCF40;
 	}
@@ -89,61 +89,61 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
 	int		max;
 	// int		z;
 	// int		z1;
-	data->x = x;
-	data->x1 = x1;
-	data->y = y;
-	data->y1 = y1;
+	p->x = x;
+	p->x1 = x1;
+	p->y = y;
+	p->y1 = y1;
 
-	data->z = data->matrix[(int)data->y][(int)data->x];
-	data->z1 = data->matrix[(int)data->y1][(int)data->x1];
+	p->z = data->matrix[(int)p->y][(int)p->x];
+	p1->z = data->matrix[(int)p->y1][(int)p->x1];
 
 	// Zoom
-	data->x *= data->zoom;
-	data->y *= data->zoom;
-	data->x1 *= data->zoom;
-	data->y1 *= data->zoom;
+	p->x *= p->zoom;
+	p->y *= p->zoom;
+	p->x1 *= p->zoom;
+	p->y1 *= p->zoom;
 
-	// data->x = x;
-	// data->x1 = x1;
-	// data->y = y;
-	// data->y1 = y1;
+	// p->x = x;
+	// p->x1 = x1;
+	// p->y = y;
+	// p->y1 = y1;
 
 	// Isometric
 	isometric(data);
 
 	// Centering
-	data->x += 400;
-	data->y += 300;
-	data->x1 += 400;
-	data->y1 += 300;
+	p->x += 400;
+	p->y += 300;
+	p->x1 += 400;
+	p->y1 += 300;
 
 	// Shift
-	data->x += data->shift_x;
-	data->x1 += data->shift_x;
-	data->y += data->shift_y;
-	data->y1 += data->shift_y;
+	p->x += data->shift_x;
+	p->x1 += data->shift_x;
+	p->y += data->shift_y;
+	p->y1 += data->shift_y;
 
-	x_step = data->x1 - data->x; // -2
-	y_step = data->y1 - data->y; // -11
+	x_step = p->x1 - p->x; // -2
+	y_step = p->y1 - p->y; // -11
 	max = MAX(MOD(x_step), MOD(y_step));
 	x_step /= max;
 	y_step /= max;
 
-	//  x = data->x;
-	//  x1 = data->x1;
-	//  y = data->y;
-	//  y1 = data->y1;
+	//  x = p->x;
+	//  x1 = p->x1;
+	//  y = p->y;
+	//  y1 = p->y1;
 
-	while ((int)(data->x - data->x1) || (int)(data->y - data->y1))
+	while ((int)(p->x - p->x1) || (int)(p->y - p->y1))
 	{
-		if ((data->x >= 0 && data->x <= data->img_width) && \
-		(data->y >= 0 && data->y <= data->img_height))
+		if ((p->x >= 0 && p->x <= data->img_width) && \
+		(p->y >= 0 && p->y <= data->img_height))
 		{
 			get_color(data);
-			my_mlx_pixel_put(data, data->x, data->y, data->color);
+			my_mlx_pixel_put(data, p->x, p->y, data->color);
 		}
-		data->x += x_step;
-		data->y += y_step;
+		p->x += x_step;
+		p->y += y_step;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:53:41 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/10 23:07:47 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/11 21:32:13 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	render(t_fdf *data)
 		mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	draw(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-	show_tab(data);
+	// show_tab(data, p);
 	get_hook(data);
 	if (data->render_flag)
 		mlx_destroy_image(data->mlx_ptr, tmp);

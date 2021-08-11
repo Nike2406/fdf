@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 14:05:38 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/11 14:13:09 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/11 14:57:21 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@
 // 	arr1[0] = start_x;
 // 	arr1[1] = start_y;
 // 	arr1[2] = col1;
-// 	arr2[0] = data->x1;
-// 	arr2[1] = data->y1;
+// 	arr2[0] = p->x1;
+// 	arr2[1] = p->y1;
 // 	arr2[2] = col2;
-// 	arr_tmp[0] = data->x;
-// 	arr_tmp[1] = data->y;
+// 	arr_tmp[0] = p->x;
+// 	arr_tmp[1] = p->y;
 // 	arr_tmp[2] = 0x00;
 // 	// float	coeff;
 // 	// t_col	trgb0;
@@ -84,29 +84,29 @@
 // 	// t_col	trgb_shift;
 // 	double	coeff;
 
-// 	// if (data->z)
+// 	// if (p->z)
 // 	// 	trgb0 = get_col(0xAA0000);
 // 	// else
 // 	// 	trgb0 = get_col(0xFFFFFF);
-// 	// if (data->z1)
+// 	// if (p1->z)
 // 	// 	trgb1 = get_col(0xAA0000);
 // 	// else
 // 	// 	trgb1 = get_col(0xFFFFFF);
 
-// 	// coeff = sqrt((data->x1 - data->y1) * (data->x1 - data->y1)
-// 	// 		+ (data->x - data->y) * (data->x - data->y))
-// 	// 	/ sqrt((data->y - data->z) * (data->y - data->z)
-// 	// 		+ (data->x - data->z1) * (data->x - data->z1));
+// 	// coeff = sqrt((p->x1 - p->y1) * (p->x1 - p->y1)
+// 	// 		+ (p->x - p->y) * (p->x - p->y))
+// 	// 	/ sqrt((p->y - p->z) * (p->y - p->z)
+// 	// 		+ (p->x - p1->z) * (p->x - p1->z));
 
 // 	coeff = sqrt((arr2[0] - arr_tmp[0]) * (arr2[0] - arr_tmp[0])
 // 			+ (arr2[1] - arr_tmp[1]) * (arr2[1] - arr_tmp[1]))
 // 		/ sqrt((arr2[0] - arr1[0]) * (arr2[0] - arr1[0])
 // 			+ (arr2[1] - arr1[1]) * (arr2[1] - arr1[1]));
 
-// // coeff = sqrt((data->x - data->z) * (data->x - data->z)
-// // 			+ (data->y - data->z1) * (data->y - data->z1))
-// // 		/ sqrt((data->x -data->x1) * (data->x -data->x1)
-// // 			+ (data->y - data->y1) * (data->y - data->y1));
+// // coeff = sqrt((p->x - p->z) * (p->x - p->z)
+// // 			+ (p->y - p1->z) * (p->y - p1->z))
+// // 		/ sqrt((p->x -p->x1) * (p->x -p->x1)
+// // 			+ (p->y - p->y1) * (p->y - p->y1));
 // 	// coeff = 0.5;
 // 	data->color = create_trgb(get_r(col2) + \
 // 			(get_r(col1) - get_r(col2)) * coeff, \
@@ -130,7 +130,7 @@
 // 	// 		get_g(col1) + (get_g(col2) - get_g(col1)) * coeff, \
 // 	// 		get_b(col1) + (get_b(col2) - get_b(col1)) * coeff);
 
-// 	// if (data->z || data->z1)
+// 	// if (p->z || p1->z)
 // 	// {
 // 	// 	data->color = 0xFFCF40;
 // 	// }

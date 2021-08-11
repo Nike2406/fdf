@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/11 14:13:37 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/11 22:43:07 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ typedef struct s_col
 	int	b;
 }	t_col;
 
+typedef struct s_dot
+{
+	double	x;
+	double	y;
+	double	z;
+	int		color;
+}	t_dot;
+
+
 typedef struct s_fdf
 {
 	void	*img;
@@ -48,13 +57,19 @@ typedef struct s_fdf
 	int		left_butt;
 	int		render_flag;
 
+	float	rotate_x;
+	float	rotate_y;
+	float	rotate_z;
+	int		mouse_x;
+	int		mouse_y;
+
 	struct	s_col	trgb;
-	double	x;
-	double	y;
-	int	z;
-	double	x1;
-	double	y1;
-	int	z1;
+	// double	x;
+	// double	y;
+	// int		z;
+	// double	x1;
+	// double	y1;
+	// int		z1;
 
 
 	void	*mlx_ptr;
@@ -65,20 +80,21 @@ int		deal_key(int key, t_fdf *data);
 int		deal_mouse(int key, int x, int y, t_fdf *data);
 int		mouse_up(int key, int x, int y, t_fdf *data);
 int		mouse_move(int x, int y, t_fdf *data);
-void	pre_brase(int f, double x, double y, t_fdf *data);
-void	bresenham(t_fdf *data);
+void	pre_brase(int f, t_dot *p, t_dot *p1, int x, int y);
+void	bresenham(t_fdf *data, t_dot *p, t_dot *p1);
+void	get_position(t_fdf *data, t_dot *p, t_dot *p1);
 void	draw(t_fdf *data);
-void	isometric(t_fdf *data);
+void	isometric(t_fdf *data, t_dot *p, t_dot *p1);
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
 void	render(t_fdf *data);
 void	get_hook(t_fdf *data);
-void	show_tab(t_fdf *data);
+void	show_tab(t_fdf *data, t_dot *p);
 
-void	rotate_x(t_fdf *data);
-void	rotate_y(t_fdf *data);
-void	rotate_z(t_fdf *data);
+void	rotate_x(t_dot *p, t_dot *p1, t_fdf *data);
+void	rotate_y(t_dot *p, t_dot *p1, t_fdf *data);
+void	rotate_z(t_dot *p, t_dot *p1, t_fdf *data);
 
-void	get_color(t_fdf *data);
+void	get_color(t_dot *p, t_dot *p1);
 
 void	read_file(char *file_name, t_fdf *data);
 void	fill_matrix(int *z_line, char *line);
