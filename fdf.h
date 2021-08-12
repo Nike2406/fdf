@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/12 00:14:22 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/12 02:54:03 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	show_tab(t_fdf *data, t_dot *p);
 void	rotate_x(t_dot *p, t_dot *p1, t_fdf *data);
 void	rotate_y(t_dot *p, t_dot *p1, t_fdf *data);
 void	rotate_z(t_dot *p, t_dot *p1, t_fdf *data);
+void	rotate_test(t_dot *p, t_dot *p1, t_fdf *data);
 
 void	get_color(t_dot *p, t_dot *p1);
 

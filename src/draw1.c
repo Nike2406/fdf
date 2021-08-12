@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/12 01:31:59 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/12 02:59:19 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,42 @@ float	MAX(float a, float b)
 
 void	isometric(t_fdf *data, t_dot *p, t_dot *p1)
 {
-	(void)p;
-	// p->x = (p->x - p->y) * cos(data->alpha);
-	// p->y = (p->x + p->y) * sin(data->alpha) - p->z * data->cof_z;
-	p1->x = (p1->x - p1->y) * cos(data->alpha);
-	p1->y = (p1->x + p1->y) * sin(data->alpha) - p1->z * data->cof_z;
+	p->x = (p->x - p->y) * cos(0.8);
+	p->y = (p->x + p->y) * sin(0.8) - p->z * data->cof_z;
+	p1->x = (p1->x - p1->y) * cos(0.8);
+	p1->y = (p1->x + p1->y) * sin(0.8) - p1->z * data->cof_z;
+
+	// rotate_test(p, p1, data);
+	// float y_last;
+	// float y_last1;
+	// // data->alpha = data->rotate_x;
+	// y_last = p->y - ((data->height - 1) / 2);
+	// p->y = y_last * cos(data->alpha) + p->z * sin(data->alpha);
+	// p->z = -y_last * sin(data->alpha) + p->z * cos(data->alpha);
+	// y_last1 = p1->y - ((data->height - 1) / 2);
+	// p1->y = y_last1 * cos(data->alpha) + p1->z * sin(data->alpha);
+	// p1->z = -y_last1 * sin(data->alpha) + p1->z * cos(data->alpha);
 }
 
 void	get_color(t_dot *p, t_dot *p1)
 {
-	if (p->z || p1->z)
-	{
+	if (p->z)
 		p->color = 0xFFCF40;
-	}
+	else if (p1->z)
+		p->color = 0xFFCF40;
 	else
+	{
 		p->color = 0x8243D6;
+		p1->color = 0x8243D6;
+	}
 }
 
 void	get_position(t_fdf *data, t_dot *p, t_dot *p1)
 {
 	p->z = data->matrix[(int)p->y][(int)p->x];
 	p1->z = data->matrix[(int)p1->y][(int)p1->x];
+
+	get_color(p, p1); // step
 
 	// Zoom
 	p->x *= data->zoom;
@@ -66,7 +81,7 @@ void	get_position(t_fdf *data, t_dot *p, t_dot *p1)
 	// rotate_z(p, p1, data);
 
 	// Isometric
-	isometric(data, p, p1);
+	// isometric(data, p, p1);
 	// Centering
 	p->x += 400;
 	p->y += 300;
@@ -79,9 +94,9 @@ void	get_position(t_fdf *data, t_dot *p, t_dot *p1)
 	p->y += data->shift_y;
 	p1->y += data->shift_y;
 
-	// rotate_x(p, p1, data);
-	// rotate_y(p, p1, data);
-	// rotate_z(p, p1, data);
+	rotate_x(p, p1, data);
+	rotate_y(p, p1, data);
+	rotate_z(p, p1, data);
 }
 
 void	bresenham(t_fdf *data, t_dot *p, t_dot *p1)
@@ -91,6 +106,7 @@ void	bresenham(t_fdf *data, t_dot *p, t_dot *p1)
 	long	max;
 
 	// show_tab(data, p);
+
 	get_position(data, p, p1);
 
 	x_step = p1->x - p->x; // -2
@@ -104,7 +120,6 @@ void	bresenham(t_fdf *data, t_dot *p, t_dot *p1)
 		if ((p->x >= 0 && p->x <= data->img_width) && \
 		(p->y >= 0 && p->y < data->img_height))
 		{
-			get_color(p, p1);
 			my_mlx_pixel_put(data, p->x, p->y, p->color);
 		}
 		p->x += x_step;
