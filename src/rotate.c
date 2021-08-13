@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 21:07:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/13 14:41:26 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/13 15:37:56 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	rotate_x(t_dot *p, t_dot *p1, t_fdf *data, double alpha)
 
 	// alpha = data->rotate_x;
 	y_last = p->y - ((data->height * data->zoom - 1) / 2);
-	p->y = y_last * cos(alpha) + p->z * sin(alpha);
-	// p->z = -y_last * sin(alpha);// + p->z * cos(alpha);
+	p->y = y_last * cos(alpha);// + p->z * sin(alpha);
+	p->z = -y_last * sin(alpha);// + p->z * cos(alpha);
 	y_last1 = p1->y - ((data->height * data->zoom - 1) / 2);
-	p1->y = y_last1 * cos(alpha) + p1->z * sin(alpha);
-	// p1->z = -y_last1 * sin(alpha);// + p1->z * cos(alpha);
+	p1->y = y_last1 * cos(alpha);// + p1->z * sin(alpha);
+	p1->z = -y_last1 * sin(alpha);// + p1->z * cos(alpha);
 }
 
 void	rotate_y(t_dot *p, t_dot *p1, t_fdf *data, double alpha)
@@ -38,10 +38,10 @@ void	rotate_y(t_dot *p, t_dot *p1, t_fdf *data, double alpha)
 	// alpha = data->rotate_y;
 	x_last = p->x - ((data->width * data->zoom - 1) / 2);
 	p->x = x_last * cos(alpha) + p->z * sin(alpha);
-	// p->z = -x_last * sin(alpha);// + p->z * cos(alpha);
+	p->z = -x_last * sin(alpha);// + p->z * cos(alpha);
 	x_last1 = p1->x - ((data->width * data->zoom - 1) / 2);
 	p1->x = x_last1 * cos(alpha) + p1->z * sin(alpha);
-	// p1->z = -x_last1 * sin(alpha);// + p1->z * cos(alpha);
+	p1->z = -x_last1 * sin(alpha);// + p1->z * cos(alpha);
 }
 
 void	rotate_z(t_dot *p, t_dot *p1, double alpha)

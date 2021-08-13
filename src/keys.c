@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 00:21:31 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/13 14:35:35 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/13 15:05:58 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	mouse_up(int key, int x, int y, t_fdf *data)
 
 int	deal_key(int key, t_fdf *data)
 {
-	ft_putnbr(key);
-	ft_putchar('\n');
+	// ft_putnbr(key);
+	// ft_putchar('\n');
 	if (key == 126 || key == 13)
 		data->shift_y -= 10;
 	else if (key == 125 || key == 1)
