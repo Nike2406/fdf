@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/13 15:37:03 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/13 20:27:30 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,17 @@ void	get_position(t_fdf *data, t_dot *p, t_dot *p1)
 		return ;
 	}
 
+	// Isometric
+	if (data->proection_flag)
+	{
+		isometric(data, p, p1);
+		// data->proection_flag = 0;
+	}
+
 	// Rotate
 	rotate_x(p, p1, data, data->rotate_x);
 	rotate_y(p, p1, data, data->rotate_y);
 	rotate_z(p, p1, data->rotate_z);
-
-	// Isometric
-	isometric(data, p, p1);
 
 	// Centering
 	p->x += data->img_width / 2;

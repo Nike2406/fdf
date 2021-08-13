@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:56:50 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/13 14:35:27 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/13 20:32:36 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ void	data_preset(t_fdf *data)
 	data->shift_y = 0;
 	data->origin = 0;
 	// data->beta = 1;
+	data->proection_flag = 1;
 }

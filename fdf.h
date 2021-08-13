@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/13 14:35:30 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/13 20:24:45 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_fdf
 	int		render_flag;
 
 	// float	beta;
+	int		proection_flag;
 
 	float	rotate_x;
 	float	rotate_y;

@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 00:21:31 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/13 15:05:58 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/13 20:32:00 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	mouse_up(int key, int x, int y, t_fdf *data)
 
 int	deal_key(int key, t_fdf *data)
 {
-	// ft_putnbr(key);
-	// ft_putchar('\n');
+	ft_putnbr(key);
+	ft_putchar('\n');
 	if (key == 126 || key == 13)
 		data->shift_y -= 10;
 	else if (key == 125 || key == 1)
@@ -71,9 +71,15 @@ int	deal_key(int key, t_fdf *data)
 	else if (key == 123 || key == 0)
 		data->shift_x -= 10;
 	else if (key == 14)
-		data->cof_z += 0.02;
+	{
+		if (data->proection_flag)
+			data->cof_z += 0.02;
+	}
 	else if (key == 12)
-		data->cof_z -= 0.02;
+	{
+		if (data->proection_flag)
+			data->cof_z -= 0.02;
+	}
 	// else if (key == 83)
 	// 	data->beta += 0.05;
 	// else if (key == 85)
@@ -112,6 +118,14 @@ int	deal_key(int key, t_fdf *data)
 	{
 		data->origin = 1;
 		//origin state
+	}
+	else if (key == 49)
+	{
+		if (data->proection_flag)
+			data->proection_flag = 0;
+		else
+			data->proection_flag = 1;
+		// change proection
 	}
 	else if (key == 69)
 		data->zoom += 4;
