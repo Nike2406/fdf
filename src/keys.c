@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 00:21:31 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/12 01:33:34 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/13 14:35:35 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	mouse_move(int x, int y, t_fdf *data)
 {
+	// data->shift_x = x;
+	// data->shift_y = y;
 	data->mouse_x = x;
 	data->mouse_y = y;
 	if (data->left_butt && x >= 0 && x <= data->img_width && \
@@ -58,8 +60,8 @@ int	mouse_up(int key, int x, int y, t_fdf *data)
 
 int	deal_key(int key, t_fdf *data)
 {
-	// ft_putnbr(key);
-	// ft_putchar('\n');
+	ft_putnbr(key);
+	ft_putchar('\n');
 	if (key == 126 || key == 13)
 		data->shift_y -= 10;
 	else if (key == 125 || key == 1)
@@ -72,25 +74,44 @@ int	deal_key(int key, t_fdf *data)
 		data->cof_z += 0.02;
 	else if (key == 12)
 		data->cof_z -= 0.02;
+	// else if (key == 83)
+	// 	data->beta += 0.05;
+	// else if (key == 85)
+	// 	data->beta -= 0.05;
 	else if (key == 91) // rotate start
 	{
-		data->alpha += 0.1;
+		data->rotate_x += 0.1;
 		//up
 	}
 	else if (key == 88)
 	{
-		data->alpha += 0.1;
+		data->rotate_y += 0.1;
 		//right
 	}
 	else if (key == 84)
 	{
-		data->alpha -= 0.1;
+		data->rotate_x -= 0.1;
 		//down
 	}
 	else if (key == 86) // rotate ends
 	{
-		data->alpha -= 0.1;
+		data->rotate_y -= 0.1;
 		//left
+	}
+	else if (key == 89)
+	{
+		data->rotate_z -= 0.1;
+		//rotate-
+	}
+	else if (key == 92)
+	{
+		data->rotate_z += 0.1;
+		//rotate+
+	}
+	else if (key == 87) // rotate ends
+	{
+		data->origin = 1;
+		//origin state
 	}
 	else if (key == 69)
 		data->zoom += 4;
