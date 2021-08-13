@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/13 20:27:30 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/13 20:45:28 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,7 @@ void	get_position(t_fdf *data, t_dot *p, t_dot *p1)
 
 	// Isometric
 	if (data->proection_flag)
-	{
 		isometric(data, p, p1);
-		// data->proection_flag = 0;
-	}
 
 	// Rotate
 	rotate_x(p, p1, data, data->rotate_x);
