@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:53:41 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/11 21:32:13 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/14 19:31:08 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(int argc, char **argv)
 	if (!data)
 		ft_err(1);
 	read_file(argv[1], data);
+	data->proection_flag = 1;
 	data_preset(data);
 	render(data);
 	return (0);

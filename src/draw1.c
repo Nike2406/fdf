@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/13 20:45:28 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/14 21:52:23 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,20 @@ void	get_position(t_fdf *data, t_dot *p, t_dot *p1)
 		return ;
 	}
 
-	// Isometric
-	if (data->proection_flag)
-		isometric(data, p, p1);
-
 	// Rotate
 	rotate_x(p, p1, data, data->rotate_x);
 	rotate_y(p, p1, data, data->rotate_y);
 	rotate_z(p, p1, data->rotate_z);
 
+	// Isometric
+	if (data->proection_flag)
+		isometric(data, p, p1);
+
 	// Centering
 	p->x += data->img_width / 2;
-	p->y += data->img_width / 2;
+	p->y += data->img_height / 2;
 	p1->x += data->img_width / 2;
-	p1->y += data->img_width / 2;
+	p1->y += data->img_height / 2;
 
 	// Shift
 	p->x += data->shift_x;
@@ -113,12 +113,10 @@ void	bresenham(t_fdf *data, t_dot *p, t_dot *p1)
 	double	y_step;
 	long	max;
 
-	// show_tab(data, p);
-
 	get_position(data, p, p1);
 
-	x_step = p1->x - p->x; // -2
-	y_step = p1->y - p->y; // -11
+	x_step = p1->x - p->x;
+	y_step = p1->y - p->y;
 	max = MAX(MOD(x_step), MOD(y_step));
 	x_step /= max;
 	y_step /= max;
@@ -127,9 +125,7 @@ void	bresenham(t_fdf *data, t_dot *p, t_dot *p1)
 	{
 		if ((p->x >= 0 && p->x <= data->img_width) && \
 		(p->y >= 0 && p->y < data->img_height))
-		{
 			my_mlx_pixel_put(data, p->x, p->y, p->color);
-		}
 		p->x += x_step;
 		p->y += y_step;
 	}
