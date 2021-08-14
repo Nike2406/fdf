@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/14 20:36:16 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/14 23:06:53 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_fdf
 	float	rotate_x;
 	float	rotate_y;
 	float	rotate_z;
+
 	int		mouse_x;
 	int		mouse_y;
 	int		mouse_prev_x;

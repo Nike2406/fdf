@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 00:21:31 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/14 21:30:48 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/14 23:45:45 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,23 @@
 
 int	mouse_move(int x, int y, t_fdf *data)
 {
-	// data->shift_x = x;
-	// data->shift_y = y;
-	data->mouse_x = x;
-	data->mouse_y = y;
 	if (data->left_butt && x >= 0 && x <= data->img_width && \
 		y >= 0 && y <= data->img_height)
 	{
-		// if (x / 20 < data->mouse_x)
-		// 	data->rotate_y += 0.05;
-		// if (x / 20 < data->mouse_x)
-		// 	data->rotate_y -= 0.05;
-		// if (y / 20 > data->mouse_y)
-		// 	data->rotate_x += 0.05;
-		// if (y / 20 < data->mouse_y)
-		// 	data->rotate_x -= 0.05;
+		if (x > data->mouse_x)
+			data->rotate_x -= 0.02;
+		if (x < data->mouse_x)
+			data->rotate_x += 0.02;
+		if (y > data->mouse_y)
+			data->rotate_y += 0.02;
+		if (y < data->mouse_y)
+			data->rotate_y -= 0.02;
+		data->mouse_x = x;
+		data->mouse_y = y;
 		printf("x - %d, y - %d, \n", x, y);
 	}
-	draw(data);
+	render(data);
 	return (0);
-
-	// data->mouse_prev_x = data->mouse_x;
-	// data->mouse_prev_y = data->mouse_y;
-	// data->mouse_x = x;
-	// data->mouse_y = y;
-	// if (data->left_butt && x >= 0 && x <= data->img_width && \
-	// 	y >= 0 && y <= data->img_height)
-	// {
-	// 	data->rotate_x += (x - data->mouse_prev_x);
-	// 	data->rotate_y += (y - data->mouse_prev_y);
-	// 	draw(data);
-	// 	printf("x - %d, y - %d, \n", x, y);
-	// }
-	// return (0);
 }
 
 int	mouse_up(int key, int x, int y, t_fdf *data)
@@ -128,13 +112,13 @@ int	deal_key(int key, t_fdf *data)
 		// change proection
 	}
 	else if (key == 69)
-		data->zoom += 4;
+		data->zoom += 1;
 	else if (key == 78)
 	{
 		if (data->zoom <= 0)
 			return (0);
 		else
-			data->zoom -= 4;
+			data->zoom -= 1;
 	}
 	else if (key == 53)
 		exit(0);
