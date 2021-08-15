@@ -16,7 +16,8 @@ endif
 LIBFT_OBJS	= $(LIBFT:%.c=%.o)
 SRCS 		= src/fdf.c \
 			src/read_file.c \
-			src/utils.c \
+			src/utils1.c \
+			src/utils2.c \
 			src/draw1.c \
 			src/draw2.c \
 			src/keys.c \

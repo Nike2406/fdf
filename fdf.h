@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/15 15:43:19 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/15 16:10:04 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int		mouse_move(int x, int y, t_fdf *data);
 void	pre_brase(int f, t_dot *p, t_dot *p1, int x, int y);
 void	bresenham(t_fdf *data, t_dot *p, t_dot *p1);
 void	get_position(t_fdf *data, t_dot *p, t_dot *p1);
+void	change_position(t_fdf *data, t_dot *p, t_dot *p1);
 void	draw(t_fdf *data);
 void	isometric(t_fdf *data, t_dot *p, t_dot *p1);
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
@@ -104,6 +105,10 @@ void	rotate_y(t_dot *p, t_dot *p1, t_fdf *data, double alpha);
 void	rotate_z(t_dot *p, t_dot *p1, double alpha);
 
 void	get_color(t_dot *p, t_dot *p1);
+int		create_trgb(int r, int g, int b);
+int		get_r(int trgb);
+int		get_g(int trgb);
+int		get_b(int trgb);
 
 void	read_file(char *file_name, t_fdf *data);
 void	fill_matrix(int *z_line, char *line);

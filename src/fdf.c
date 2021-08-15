@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:53:41 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/15 15:55:30 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/15 16:01:43 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color) // test
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	// printf("dst - %ld", (long)dst);
-	// if (dst < 0)
-	// 	return ;
-	// printf("dst - %p\n", dst);
-	// printf("color - %d\n", color);
 	*(unsigned int *)dst = color;
 }
 
