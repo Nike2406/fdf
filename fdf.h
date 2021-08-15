@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 14:52:46 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/14 23:06:53 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/15 15:43:19 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_fdf
 	int		mouse_prev_y;
 
 	int		origin;
+	int		clue;
 
 	struct	s_col	trgb;
 	// double	x;
@@ -96,7 +97,7 @@ void	isometric(t_fdf *data, t_dot *p, t_dot *p1);
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
 void	render(t_fdf *data);
 void	get_hook(t_fdf *data);
-void	show_tab(t_fdf *data, t_dot *p);
+void	show_tab(t_fdf *data);
 
 void	rotate_x(t_dot *p, t_dot *p1, t_fdf *data, double alpha);
 void	rotate_y(t_dot *p, t_dot *p1, t_fdf *data, double alpha);

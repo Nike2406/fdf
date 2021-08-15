@@ -6,27 +6,11 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:12:58 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/15 00:01:12 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/15 15:06:21 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
-float	MOD(float a)
-{
-	if (a < 0)
-		return (-a);
-	else
-		return (a);
-}
-
-float	MAX(float a, float b)
-{
-	if (a < b)
-		return (b);
-	else
-		return (a);
-}
 
 void	isometric(t_fdf *data, t_dot *p, t_dot *p1)
 {
@@ -36,16 +20,6 @@ void	isometric(t_fdf *data, t_dot *p, t_dot *p1)
 	p->y = (p->x + p->y) * sin(0.8) - p->z;// * data->cof_z;
 	p1->x = (p1->x - p1->y) * cos(0.8);
 	p1->y = (p1->x + p1->y) * sin(0.8) - p1->z;// * data->cof_z;
-	// rotate_test(p, p1, data);
-	// float y_last;
-	// float y_last1;
-	// // data->alpha = data->rotate_x;
-	// y_last = p->y - ((data->height - 1) / 2);
-	// p->y = y_last * cos(data->alpha) + p->z * sin(data->alpha);
-	// p->z = -y_last * sin(data->alpha) + p->z * cos(data->alpha);
-	// y_last1 = p1->y - ((data->height - 1) / 2);
-	// p1->y = y_last1 * cos(data->alpha) + p1->z * sin(data->alpha);
-	// p1->z = -y_last1 * sin(data->alpha) + p1->z * cos(data->alpha);
 }
 
 void	get_color(t_dot *p, t_dot *p1)
@@ -66,11 +40,12 @@ void	get_position(t_fdf *data, t_dot *p, t_dot *p1)
 	p->z = data->matrix[(int)p->y][(int)p->x];
 	p1->z = data->matrix[(int)p1->y][(int)p1->x];
 
-	if (p->z > 0 || p1->z > 0)
-	{
-		p->z *= data->cof_z;
-		p1->z *= data->cof_z;
-	}
+	// Depth
+	// if (p->z > 0 || p1->z > 0)
+	// {
+	// 	p->z *= data->cof_z;
+	// 	p1->z *= data->cof_z;
+	// }
 
 	get_color(p, p1); // step
 

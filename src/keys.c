@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 00:21:31 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/14 23:45:45 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/15 15:54:49 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	mouse_move(int x, int y, t_fdf *data)
 			data->rotate_y -= 0.02;
 		data->mouse_x = x;
 		data->mouse_y = y;
-		printf("x - %d, y - %d, \n", x, y);
+		// printf("x - %d, y - %d, \n", x, y);
 	}
 	render(data);
 	return (0);
@@ -64,10 +64,6 @@ int	deal_key(int key, t_fdf *data)
 		if (data->proection_flag)
 			data->cof_z -= 0.02;
 	}
-	// else if (key == 83)
-	// 	data->beta += 0.05;
-	// else if (key == 85)
-	// 	data->beta -= 0.05;
 	else if (key == 91) // rotate start
 	{
 		data->rotate_x += 0.1;
@@ -111,14 +107,22 @@ int	deal_key(int key, t_fdf *data)
 			data->proection_flag = 1;
 		// change proection
 	}
-	else if (key == 69)
-		data->zoom += 1;
-	else if (key == 78)
+	else if (key == 4 || key == 44)
+	{
+		if (data->clue)
+			data->clue = 0;
+		else
+			data->clue = 1;
+		// clue
+	}
+	else if (key == 69 || key == 24)
+		data->zoom += 2;
+	else if (key == 78 || key == 27)
 	{
 		if (data->zoom <= 0)
 			return (0);
 		else
-			data->zoom -= 1;
+			data->zoom -= 2;
 	}
 	else if (key == 53)
 		exit(0);
@@ -137,13 +141,13 @@ int	deal_mouse(int key, int x, int y, t_fdf *data)
 	(void)x;
 	(void)y;
 	if (key == 4)
-		data->zoom += 4;
+		data->zoom += 2;
 	if (key == 5)
 	{
 		if (data->zoom <= 0)
 			return (0);
 		else
-			data->zoom -= 4;
+			data->zoom -= 2;
 	}
 	if (key == 1)
 		data->left_butt = 1;
