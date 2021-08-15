@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 14:05:38 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/11 14:57:21 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/15 20:03:28 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,3 +146,23 @@
 // int	get_r(int trgb);
 // int	get_g(int trgb);
 // int	get_b(int trgb);
+
+
+
+// void	proect_color(t_dot *tmp, t_dot *p, t_dot *p1)
+// {
+// 	double	coeff;
+
+// 	//tmp = p0
+// 	//p = p_main
+// 	//p1 = p1
+// 	coeff = ((p1->x - tmp->x) * (p1->y - tmp->y)) \
+// 	/ ((p1->x - p->x) * (p1->y - p->y));
+
+// 	printf("coeff - %f", coeff);
+// 	tmp->color = create_trgb(get_r(p1->color)
+// 			+ (get_r(p->color) - get_r(p1->color)) * coeff,
+// 			get_g(p1->color) + (get_g(p->color) - get_g(p1->color)) * coeff,
+// 			get_b(p1->color) + (get_b(p->color) - get_b(p1->color)) * coeff);
+// }
+
