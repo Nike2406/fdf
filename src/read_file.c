@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 16:06:13 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/10 23:07:40 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/15 20:49:58 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int	get_width(char *file_name)
 	if (fd < 0)
 		ft_err(1);
 	while (get_next_line(fd, &line))
+	{
 		width = ft_wdcounter(line, ' ');
+		free(line);
+	}
 	free(line);
 	close(fd);
 	return (width);

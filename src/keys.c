@@ -6,7 +6,7 @@
 /*   By: prochell <prochell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 00:21:31 by prochell          #+#    #+#             */
-/*   Updated: 2021/08/15 15:54:49 by prochell         ###   ########.fr       */
+/*   Updated: 2021/08/15 20:57:34 by prochell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	mouse_move(int x, int y, t_fdf *data)
 			data->rotate_y -= 0.02;
 		data->mouse_x = x;
 		data->mouse_y = y;
-		// printf("x - %d, y - %d, \n", x, y);
 	}
 	render(data);
 	return (0);
